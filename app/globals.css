@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #f3c76c;
+  --secondary: #c38d51;
+  --dark: #000000;
+  --light: #ffffff;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-archivo font-semibold tracking-wider;
+  }
+}
+
+/* Removendo os estilos de botão do CSS global para evitar problemas de sintaxe */
