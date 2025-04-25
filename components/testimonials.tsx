@@ -34,7 +34,8 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="section bg-[#f3c76c] text-black rounded-lg my-16">
+    <section className="section bg-[#f3c76c] text-black rounded-lg my-16 py-16">
+      <div className="max-w-7xl mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-archivo tracking-wider mb-4">O Que Nossos Clientes Dizem</h2>
         <p className="max-w-2xl mx-auto">A satisfação dos nossos clientes é o nosso maior orgulho</p>
@@ -71,6 +72,10 @@ export default function Testimonials() {
           </div>
         ))}
       </div>
+      </div>
+
+
+      
     </section>
   )
 }

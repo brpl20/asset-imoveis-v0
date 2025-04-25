@@ -1,13 +1,20 @@
 import Link from "next/link"
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react"
+import Image from "next/image"
 
 export default function Footer() {
   return (
     <footer className="bg-black text-[#f3c76c] pt-12 pb-6">
-      <div className="container-custom">
+      <div className="max-w-7xl mx-auto px-[10px]">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl mb-4 font-archivo tracking-wider">ASSET</h3>
+            <Image
+              src="asset_vertical_02.png"
+              alt="Asset Imobiliária Logo"
+              width={190}
+              height={190}
+              className="mb-5"
+            />
             <p className="text-sm mb-4">
               Soluções imobiliárias inteligentes para você encontrar o imóvel dos seus sonhos.
             </p>

@@ -11,7 +11,7 @@ export function CustomButton({ variant = "primary", children, className, ...prop
   return (
     <button
       className={cn(
-        "font-medium py-2 px-4 rounded transition-colors",
+        "font-medium py-4 px-8 rounded transition-colors",
         variant === "primary"
           ? "bg-[#f3c76c] text-black hover:bg-[#c38d51]"
           : "bg-black text-[#f3c76c] hover:bg-gray-800",

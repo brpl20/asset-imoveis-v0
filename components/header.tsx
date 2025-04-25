@@ -9,18 +9,17 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="bg-black text-[#f3c76c] sticky top-0 z-50">
-      <div className="container-custom">
+    <header className="bg-black text-[#f3c76c] sticky top-0 z-50 w-full">
+      <div className="max-w-7xl mx-auto px-[10px]">
         <div className="flex items-center justify-between py-4">
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/placeholder.svg?height=40&width=40"
+              src="asset_horizontal_02.png"
               alt="Asset Imobiliária Logo"
-              width={40}
-              height={40}
+              width={215}
+              height={215}
               className="rounded"
             />
-            <span className="font-archivo font-semibold tracking-wider text-xl">ASSET</span>
           </Link>
 
           {/* Desktop Navigation */}

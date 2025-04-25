@@ -2,20 +2,20 @@ import { Search } from "lucide-react"
 
 export default function Hero() {
   return (
-    <div className="relative bg-black text-[#f3c76c] py-20 md:py-32">
+    <div className="relative bg-black text-[#f3c76c] py-20 md:py-32 w-full">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{
-          backgroundImage: "url('/placeholder.svg?height=800&width=1600')",
+          backgroundImage: "url('asset_pattern_com-fundo_01.png')",
         }}
       />
 
-      <div className="container-custom relative z-10">
+      <div className="flex flex-col items-center justify-center relative z-10">
         <div className="max-w-3xl">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-archivo font-semibold tracking-wider mb-6">
+          <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-archivo font-semibold tracking-wider mb-6">
             Encontre o Imóvel Perfeito para Você
           </h1>
-          <p className="text-lg md:text-xl mb-8">
+          <p className="text-lg text-center md:text-xl mb-8">
             Soluções imobiliárias inteligentes com a expertise que você precisa para fazer o melhor negócio.
           </p>
 
