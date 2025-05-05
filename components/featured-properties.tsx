@@ -2,45 +2,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { Bath, BedDouble, MapPin, Maximize } from "lucide-react"
 import { CustomButton } from "./ui/custom-button"
-
-// Dados simulados de imóveis
-const properties = [
-  {
-    id: 1,
-    title: "Apartamento de Luxo",
-    location: "Jardins, São Paulo",
-    price: "R$ 1.200.000",
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 120,
-    image: "/placeholder.svg?height=300&width=400",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Casa com Piscina",
-    location: "Alphaville, Barueri",
-    price: "R$ 2.500.000",
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 350,
-    image: "/placeholder.svg?height=300&width=400",
-    featured: true,
-  },
-  {
-    id: 3,
-    title: "Cobertura Duplex",
-    location: "Vila Nova Conceição, São Paulo",
-    price: "R$ 3.800.000",
-    bedrooms: 4,
-    bathrooms: 4,
-    area: 280,
-    image: "/placeholder.svg?height=300&width=400",
-    featured: true,
-  },
-]
+import { properties } from "../app/imoveis/[slug]/page"
 
 export default function FeaturedProperties() {
+  const recentProperties = properties.slice(0, 3)
   return (
     <section className="py-12 md:py-16 px-4">
       <div className="max-w-7xl mx-auto px-4">
@@ -52,11 +17,11 @@ export default function FeaturedProperties() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {properties.map((property) => (
-            <Link href={`/imoveis/${property.id}`} key={property.id} className="group">
+          {recentProperties.map((property) => (
+            <Link key={property.id} href={`/imoveis/${property.slug}`} className="group">
               <div className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform group-hover:-translate-y-1">
                 <div className="relative h-64">
-                  <Image src={property.image || "/placeholder.svg"} alt={property.title} fill className="object-cover" />
+                  <Image src={property.images[0] || "/placeholder.svg"} alt={property.title} fill className="object-cover" />
                   <div className="absolute top-4 right-4 bg-[#f3c76c] text-black px-3 py-1 rounded-full text-sm font-medium">
                     Destaque
                   </div>

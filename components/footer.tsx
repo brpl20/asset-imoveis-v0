@@ -102,10 +102,8 @@ export default function Footer() {
           <div>
             <h4 className="text-lg mb-4 font-archivo tracking-wider">Contato</h4>
             <address className="not-italic text-sm space-y-2">
-              <p>Av. Paulista, 1000</p>
-              <p>São Paulo, SP</p>
-              <p>CEP: 01310-100</p>
-              <p>Tel: (11) 3000-0000</p>
+              <p>Cascavel, PR</p>
+              <p>Tel: (45) 99810-0566</p>
               <p>Email: contato@assetimobiliaria.com.br</p>
             </address>
           </div>

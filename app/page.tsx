@@ -10,16 +10,14 @@ export default function Home() {
     <div className="min-h-screen">
       <Hero />
 
-      
-        <FeaturedProperties />
+      <FeaturedProperties />
 
-        {/* <Advertisement position="home-middle" className="my-12" /> */}
+      {/* <Advertisement position="home-middle" className="my-12" /> */}
+      <AboutSection />
 
-        <AboutSection />
+      <Testimonials />
 
-        <Testimonials />
-
-        <BlogPreview />
+      <BlogPreview />
 
     </div>
   )

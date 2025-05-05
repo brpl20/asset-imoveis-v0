@@ -21,15 +21,6 @@ const testimonials = [
     rating: 5,
     image: "/placeholder.svg?height=100&width=100",
   },
-  {
-    id: 3,
-    name: "Roberto Mendes",
-    role: "Investidor",
-    content:
-      "Trabalho com a Asset há mais de 5 anos em meus investimentos imobiliários. A equipe tem um conhecimento profundo do mercado e sempre me orienta para as melhores oportunidades.",
-    rating: 5,
-    image: "/placeholder.svg?height=100&width=100",
-  },
 ]
 
 export default function Testimonials() {
@@ -38,10 +29,10 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-archivo tracking-wider mb-4">O Que Nossos Clientes Dizem</h2>
-        <p className="max-w-2xl mx-auto">A satisfação dos nossos clientes é o nosso maior orgulho</p>
+        <p className="max-w-2xl mx-auto">A satisfação dos nossos clientes é o nosso maior patrimônio. Confira alguns depoimentos de quem já contou com a ASSET.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {testimonials.map((testimonial) => (
           <div key={testimonial.id} className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center mb-4">
