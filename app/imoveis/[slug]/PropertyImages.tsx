@@ -1,28 +1,42 @@
-// app/imoveis/[slug]/PropertyImages.tsx
 "use client"
 
-import { useState } from 'react'
+import { useState } from "react"
 import Image from "next/image"
 
-export default function PropertyImages({ property }: { property: any }) {
+interface Property {
+  title: string;
+  images: string[];
+}
+
+interface PropertyImagesProps {
+  property: Property;
+}
+
+export default function PropertyImages({ property }: PropertyImagesProps) {
   const [mainImage, setMainImage] = useState(property.images[0])
 
   return (
     <div className="mb-8">
-      <div className="relative h-[400px] rounded-lg overflow-hidden mb-2 border-2 border-primary">
+      {/* Imagem principal */}
+      <div className="relative h-96 rounded-lg overflow-hidden mb-4">
         <Image
           src={mainImage}
           alt={property.title}
           fill
-          className="object-cover"
+          className="object-cover transition-all duration-300"
+          priority
         />
       </div>
+
+      {/* Miniaturas */}
       <div className="grid grid-cols-4 gap-2">
-        {property.images.map((image: string, index: number) => (
+        {property.images.map((image, index) => (
           <button
             key={index}
             onClick={() => setMainImage(image)}
-            className="relative h-24 rounded-lg overflow-hidden border border-gray-200 hover:border-secondary transition-colors"
+            className={`relative h-24 rounded overflow-hidden border-2 ${
+              image === mainImage ? "border-primary" : "border-transparent"
+            }`}
           >
             <Image
               src={image}
@@ -30,9 +44,6 @@ export default function PropertyImages({ property }: { property: any }) {
               fill
               className="object-cover"
             />
-            {image === mainImage && (
-              <div className="absolute inset-0 bg-primary bg-opacity-30"></div>
-            )}
           </button>
         ))}
       </div>
