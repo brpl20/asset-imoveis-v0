@@ -27,3 +27,49 @@
 }
 
 /* Removendo os estilos de botão do CSS global para evitar problemas de sintaxe */
+/* Estilos para o conteúdo do rich text */
+/* Estilos para Markdown */
+.prose h2, 
+.prose h3 {
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  color: #111;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+  padding-bottom: 0.1rem;
+}
+
+.prose p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  text-align: justify;
+}
+
+.prose ul, 
+.prose ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose a {
+  color: #c38d51;
+  text-decoration: underline;
+}
+
+.prose code {
+  background-color: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+

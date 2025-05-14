@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <Image
-              src="asset_vertical_02.png"
+              src="/asset_vertical_02.png"
               alt="Asset Imobiliária Logo"
               width={190}
               height={190}
