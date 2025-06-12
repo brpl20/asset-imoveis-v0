@@ -2,19 +2,9 @@ import Link from "next/link"
 import Image from "next/image"
 import { Bath, BedDouble, MapPin, Maximize } from "lucide-react"
 import { CustomButton } from "./ui/custom-button"
+import type { FormattedProperty } from "../app/imoveis/page"
 import { getProperties, getImageUrl, PropertyImage } from "../src/services/strapi"
 
-interface FormattedProperty {
-  id: number
-  title: string
-  location: string
-  price: string
-  bedrooms: number
-  bathrooms: number
-  area: number
-  images: string[]
-  slug: string
-}
 
 function formatProperty(property: any): FormattedProperty {
   return {
@@ -22,6 +12,7 @@ function formatProperty(property: any): FormattedProperty {
     title: property.title || 'Sem título',
     location: property.location || 'Local não informado',
     price: `R$ ${property.price?.toLocaleString('pt-BR') || '0'}`,
+    description: property.description || 'Descrição não informada',
     bedrooms: property.bedrooms || 0,
     bathrooms: property.bathrooms || 0,
     area: property.area || 0,

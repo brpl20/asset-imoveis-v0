@@ -1,42 +1,24 @@
+// components/blog-preview.tsx
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, User } from "lucide-react"
 import { CustomButton } from "./ui/custom-button"
+import { getBlogPosts, getBlogImageUrl } from "@/src/services/strapi"
 
-// Dados simulados de posts do blog
-const posts = [
-  {
-    id: 1,
-    title: "Como escolher o imóvel ideal para investimento",
-    excerpt: "Descubra as principais dicas para fazer um investimento imobiliário seguro e lucrativo.",
-    date: "15 de Abril, 2023",
-    author: "Ricardo Almeida",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Investimentos",
-  },
-  {
-    id: 2,
-    title: "Tendências do mercado imobiliário para 2023",
-    excerpt: "Conheça as principais tendências que estão moldando o mercado imobiliário neste ano.",
-    date: "28 de Março, 2023",
-    author: "Juliana Costa",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Mercado",
-  },
-  {
-    id: 3,
-    title: "Dicas para decorar seu apartamento com estilo",
-    excerpt: "Aprenda como transformar seu apartamento com dicas de decoração que combinam estilo e funcionalidade.",
-    date: "10 de Março, 2023",
-    author: "Camila Santos",
-    image: "/placeholder.svg?height=300&width=500",
-    category: "Decoração",
-  },
-]
+export default async function BlogPreview() {
+  const posts = await getBlogPosts();
+  const limitedPosts = posts.slice(0, 3);
 
-export default function BlogPreview() {
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  };
+
   return (
-    <section className="py-16 px-4">
+    <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-archivo tracking-wider mb-4">Blog Imobiliário</h2>
@@ -46,37 +28,54 @@ export default function BlogPreview() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {posts.map((post) => (
-            <Link href={`/blog/${post.id}`} key={post.id} className="group">
-              <article className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform group-hover:-translate-y-1">
-                <div className="relative h-48">
-                  <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
-                  <div className="absolute top-4 left-4 bg-[#f3c76c] text-black px-3 py-1 rounded-full text-sm font-medium">
-                    {post.category}
-                  </div>
-                </div>
+          {limitedPosts.map((post) => {
+            const postData = post.attributes || post;
+            const mainImage = postData.image?.data?.[0]?.attributes;
 
-                <div className="p-6">
-                  <h3 className="text-xl font-archivo tracking-wider mb-3 group-hover:text-[#c38d51] transition-colors">
-                    {post.title}
-                  </h3>
-
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-
-                  <div className="flex justify-between text-sm text-gray-500 border-t pt-4">
-                    <div className="flex items-center">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <User className="h-4 w-4 mr-1" />
-                      <span>{post.author}</span>
+            return (
+              <Link 
+                href={`/blog/${postData.slug}`} 
+                key={post.id} 
+                className="group"
+              >
+                <article className="bg-white rounded-lg overflow-hidden shadow-lg transition-transform group-hover:-translate-y-1 h-full flex flex-col">
+                  <div className="relative h-48">
+                    <Image
+                      src={mainImage
+                        ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${mainImage.url}`
+                        : "/placeholder.svg"}
+                      alt={postData.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute top-4 left-4 bg-[#f3c76c] text-black px-3 py-1 rounded-full text-sm font-medium">
+                      {postData.category}
                     </div>
                   </div>
-                </div>
-              </article>
-            </Link>
-          ))}
+
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-xl font-archivo tracking-wider mb-3 group-hover:text-[#c38d51] transition-colors">
+                      {postData.title}
+                    </h3>
+
+                    <p className="text-gray-600 mb-4 line-clamp-3">{postData.resume}</p>
+
+                    <div className="flex justify-between text-sm text-gray-500 border-t pt-4 mt-auto">
+                      <div className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        <span>{formatDate(postData.publishedAt)}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <User className="h-4 w-4 mr-1" />
+                        <span>{postData.author}</span>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="text-center mt-10">

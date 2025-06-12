@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Explore nossa seleção de imóveis residenciais e comerciais",
 }
 
-interface FormattedProperty {
+export interface FormattedProperty {
   id: number
   title: string
   location: string
@@ -36,6 +36,7 @@ function formatProperty(property: any): FormattedProperty {
     slug: property.slug || '',
   };
 }
+export const revalidate = 60; 
 
 export default async function ImoveisPage() {
   let properties: FormattedProperty[] = []

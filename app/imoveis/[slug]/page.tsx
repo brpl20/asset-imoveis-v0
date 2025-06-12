@@ -53,6 +53,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const properties = await getProperties();
+  
+  return properties.map((property) => ({
+    slug: property.slug,
+  }));
+}
+
 export default async function PropertyPage({ params }: { params: { slug: string } }) {
   const property = await getPropertyBySlug(params.slug);
   const allProperties = await getProperties();
