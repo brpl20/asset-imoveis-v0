@@ -61,7 +61,8 @@ export const getProperties = async (filters?: {
 }): Promise<any[]> => {
   try {
     const params: any = {
-      populate: '*'
+      populate: '*',
+      next: {tags: ['featured-properties']}
     }
 
     if (filters) {

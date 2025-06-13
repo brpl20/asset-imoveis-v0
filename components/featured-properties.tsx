@@ -4,6 +4,7 @@ import { Bath, BedDouble, MapPin, Maximize } from "lucide-react"
 import { CustomButton } from "./ui/custom-button"
 import type { FormattedProperty } from "../app/imoveis/page"
 import { getProperties, getImageUrl, PropertyImage } from "../src/services/strapi"
+import { revalidateTag } from 'next/cache';
 
 
 function formatProperty(property: any): FormattedProperty {
@@ -20,6 +21,9 @@ function formatProperty(property: any): FormattedProperty {
     slug: property.slug || '',
   };
 }
+
+export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function FeaturedProperties() {
   try {
