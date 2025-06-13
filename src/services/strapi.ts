@@ -58,7 +58,7 @@ export const getProperties = async (filters?: {
   type?: string;
   minPrice?: string;
   maxPrice?: string;
-}): Promise<any[]> => {
+}): Promise<Property[]> => {
   try {
     const params: any = {
       populate: '*',
@@ -66,25 +66,20 @@ export const getProperties = async (filters?: {
     }
 
     if (filters) {
+      params.filters = {} as Record<string, any>;
+
       if (filters.type) {
-        params.filters = {
-          ...params.filters,
-          type: { $eq: filters.type }
-        }
+       (params.filters as Record<string, any>).type = { $eq: filters.type };
       }
 
       if (filters.minPrice || filters.maxPrice) {
-        params.filters = {
-          ...params.filters,
-          price: {
-            ...(filters.minPrice && { $gte: Number(filters.minPrice) }),
-            ...(filters.maxPrice && { $lte: Number(filters.maxPrice) })
-          }
-        }
+        (params.filters as Record<string, any>).price = {};
+        if (filters.minPrice) (params.filters as Record<string, any>).price.$gte = Number(filters.minPrice);
+        if (filters.maxPrice) (params.filters as Record<string, any>).price.$lte = Number(filters.maxPrice);
       }
     }
 
-    const { data } = await api.get<ApiResponse<any[]>>('/imovels', { params })
+    const { data } = await api.get<ApiResponse<Property[]>>('/imovels', { params });
     return data.data || []
   } catch (error) {
     console.error("Failed to load properties:", error)
