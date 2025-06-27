@@ -3,6 +3,9 @@ import Image from "next/image"
 import { Calendar, User } from "lucide-react"
 import { getBlogPosts, getBlogCategories, getBlogImageUrl } from "@/src/services/strapi"
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 60;
+
 export default async function BlogPage() {
   const posts = await getBlogPosts();
   const categories = await getBlogCategories();

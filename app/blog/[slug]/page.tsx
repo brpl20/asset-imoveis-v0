@@ -4,6 +4,9 @@ import { Calendar, User, Facebook, Twitter, Linkedin, ArrowLeft } from "lucide-r
 import { getBlogPostBySlug, getBlogPosts, getBlogImageUrl } from "@/src/services/strapi"
 import ReactMarkdown from 'react-markdown';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 60;
+
 const getSafeImageUrl = (post: any) => {
   const image = post?.attributes?.image?.data?.[0]?.attributes || 
                post?.image?.[0] || 
@@ -135,13 +138,5 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       </div>
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  const posts = await getBlogPosts();
-  
-  return posts.map(post => ({
-    slug: (post.attributes || post).slug,
-  }));
 }
 

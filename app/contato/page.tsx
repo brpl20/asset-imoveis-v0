@@ -1,54 +1,54 @@
-"use client"
 
 import type React from "react"
+import { Mail, Phone, Facebook, Instagram } from "lucide-react"
+import Link from "next/link"
+import { WhatsappButtonSemLink } from "@/components/WhatsButton"
 
-import { useState } from "react"
-import { Mail, MapPin, Phone, Send } from "lucide-react"
 
 export default function ContatoPageClient() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-    propertyInterest: "Não especificado",
-  })
+  // const [formData, setFormData] = useState({
+  //   name: "",
+  //   email: "",
+  //   phone: "",
+  //   subject: "",
+  //   message: "",
+  //   propertyInterest: "Não especificado",
+  // })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
-  const [submitError, setSubmitError] = useState("")
+  // const [isSubmitting, setIsSubmitting] = useState(false)
+  // const [submitSuccess, setSubmitSuccess] = useState(false)
+  // const [submitError, setSubmitError] = useState("")
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  //   const { name, value } = e.target
+  //   setFormData((prev) => ({ ...prev, [name]: value }))
+  // }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitError("")
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   setIsSubmitting(true)
+  //   setSubmitError("")
 
-    try {
-      // Simulação de envio - em um ambiente real, isso seria uma chamada à API
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+  //   try {
+  //     // Simulação de envio - em um ambiente real, isso seria uma chamada à API
+  //     await new Promise((resolve) => setTimeout(resolve, 1500))
 
-      setSubmitSuccess(true)
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-        propertyInterest: "Não especificado",
-      })
-    } catch (err) {
-      setSubmitError("Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.")
-      console.error(err)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+  //     setSubmitSuccess(true)
+  //     setFormData({
+  //       name: "",
+  //       email: "",
+  //       phone: "",
+  //       subject: "",
+  //       message: "",
+  //       propertyInterest: "Não especificado",
+  //     })
+  //   } catch (err) {
+  //     setSubmitError("Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.")
+  //     console.error(err)
+  //   } finally {
+  //     setIsSubmitting(false)
+  //   }
+  // }
 
   return (
     <>
@@ -64,12 +64,10 @@ export default function ContatoPageClient() {
           </div>
         </div>
       </section>
-
-      {/* Formulário e Informações de Contato */}
       <section className="py-16 px-4 bg-white">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
+            {/* <div>
               <h2 className="text-3xl font-archivo tracking-wider mb-4 text-secondary">Envie-nos uma mensagem</h2>
 
               {submitSuccess ? (
@@ -212,26 +210,17 @@ export default function ContatoPageClient() {
                   </div>
                 </form>
               )}
-            </div>
+            </div> */}
 
             <div>
               <h2 className="text-2xl font-bold mb-6 text-secondary">Informações de Contato</h2>
 
               <div className="space-y-6 mb-8">
                 <div className="flex items-start">
-                  <MapPin className="h-6 w-6 text-primary mr-3 mt-0.5" />
-                  <div>
-                    <h3 className="font-bold">Endereço</h3>
-                    <p className="text-gray-600">Av. Paulista, 1000, São Paulo - SP, 01310-100</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start">
                   <Phone className="h-6 w-6 text-primary mr-3 mt-0.5" />
                   <div>
                     <h3 className="font-bold">Telefone</h3>
-                    <p className="text-gray-600">(11) 3000-0000</p>
-                    <p className="text-gray-600">(11) 99999-9999 (WhatsApp)</p>
+                    <p className="text-gray-600">(45)  99810-0566</p>
                   </div>
                 </div>
 
@@ -239,32 +228,23 @@ export default function ContatoPageClient() {
                   <Mail className="h-6 w-6 text-primary mr-3 mt-0.5" />
                   <div>
                     <h3 className="font-bold">E-mail</h3>
-                    <p className="text-gray-600">contato@asset-imobiliaria.com.br</p>
+                    <p className="text-gray-600">assetimobiliaria@outlook.com</p>
                   </div>
                 </div>
-              </div>
 
-              <h3 className="text-xl font-bold mb-4 text-secondary">Horário de Atendimento</h3>
-              <div className="bg-gray-50 rounded-lg p-6 mb-8 border-l-4 border-l-primary">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-start">
                   <div>
-                    <p className="font-medium">Segunda a Sexta</p>
-                    <p className="text-gray-600">09:00 - 18:00</p>
-                  </div>
-                  <div>
-                    <p className="font-medium">Sábado</p>
-                    <p className="text-gray-600">09:00 - 13:00</p>
-                  </div>
-                  <div className="col-span-2">
-                    <p className="font-medium">Domingo e Feriados</p>
-                    <p className="text-gray-600">Fechado</p>
+                    <h3 className="font-bold">Redes Sociais</h3>
+                    <div className="flex space-x-4">
+                      <Link href="https://www.instagram.com/asset.imobiliaria/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Instagram">
+                        <Instagram className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
+                      </Link>
+                      <Link href="https://www.facebook.com/share/1Bf59gCqcg/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
+                        <Facebook className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="relative h-[300px] rounded-lg overflow-hidden bg-gray-200 flex items-center justify-center border-4 border-primary/20">
-                <MapPin className="h-12 w-12 text-secondary" />
-                <span className="absolute">Mapa indisponível na visualização</span>
               </div>
             </div>
           </div>
@@ -337,13 +317,11 @@ export default function ContatoPageClient() {
           <p className="text-lg text-black/80 max-w-2xl mx-auto mb-8">
             Entre em contato por telefone ou WhatsApp e fale diretamente com um de nossos especialistas.
           </p>
-          <a
-            href="tel:+554599810-0566"
+          <WhatsappButtonSemLink
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-secondary hover:bg-secondary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
-          >
-            <Phone className="h-5 w-5 mr-2" />
-            Entrar em contato
-          </a>
+            mensagem="Olá, gostaria de mais informações sobre os serviços da ASSET Imobiliária."
+            textoBotao="Entrar em contato via WhatsApp"
+          />
         </div>
       </section>
     </>

@@ -19,20 +19,11 @@ export default function Footer() {
               Soluções imobiliárias inteligentes para você encontrar o imóvel dos seus sonhos.
             </p>
             <div className="flex space-x-4">
-              <Link href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <Link href="https://www.instagram.com/asset.imobiliaria/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Instagram">
                 <Instagram className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
               </Link>
-              <Link href="https://facebook.com" target="_blank" aria-label="Facebook">
+              <Link href="https://www.facebook.com/share/1Bf59gCqcg/?mibextid=wwXIfr" target="_blank" aria-label="Facebook">
                 <Facebook className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
-              </Link>
-              <Link href="https://twitter.com" target="_blank" aria-label="Twitter">
-                <Twitter className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
-              </Link>
-              <Link href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
-                <Linkedin className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
-              </Link>
-              <Link href="https://youtube.com" target="_blank" aria-label="YouTube">
-                <Youtube className="h-5 w-5 hover:text-[#c38d51] transition-colors" />
               </Link>
             </div>
           </div>
@@ -104,7 +95,7 @@ export default function Footer() {
             <address className="not-italic text-sm space-y-2">
               <p>Cascavel, PR</p>
               <p>Tel: (45) 99810-0566</p>
-              <p>Email: contato@assetimobiliaria.com.br</p>
+              <p>Email: assetimobiliaria@outlook.com</p>
             </address>
           </div>
         </div>

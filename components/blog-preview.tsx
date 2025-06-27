@@ -1,9 +1,12 @@
-// components/blog-preview.tsx
 import Link from "next/link"
 import Image from "next/image"
 import { Calendar, User } from "lucide-react"
 import { CustomButton } from "./ui/custom-button"
-import { getBlogPosts, getBlogImageUrl } from "@/src/services/strapi"
+import { getBlogPosts } from "@/src/services/strapi"
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 60;
+
 
 export default async function BlogPreview() {
   const posts = await getBlogPosts();

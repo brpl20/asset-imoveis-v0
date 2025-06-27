@@ -62,7 +62,11 @@ export const getProperties = async (filters?: {
   try {
     const params: any = {
       populate: '*',
-      next: {tags: ['featured-properties']}
+      cache: 'no-store',
+      next: { 
+        tags: ['properties', 'featured-properties'],
+        revalidate: 60
+      }
     }
 
     if (filters) {

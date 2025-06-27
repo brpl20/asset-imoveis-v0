@@ -1,12 +1,11 @@
-import { Search } from "lucide-react"
-
+import { WhatsappButtonSemLink } from "@/components/WhatsButton"
 export default function Hero() {
   return (
     <div className="relative bg-black text-[#f3c76c] py-20 md:py-32 w-full">
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{
-          backgroundImage: "url('asset_pattern_com-fundo_01.png')",
+          backgroundImage: "url('/asset_pattern_com-fundo_01.png')",
         }}
       />
 
@@ -15,11 +14,26 @@ export default function Hero() {
           <h1 className="text-4xl text-center md:text-5xl lg:text-6xl font-archivo font-semibold tracking-wider mb-6">
             Encontre o Imóvel Perfeito para Você
           </h1>
-          <p className="text-lg text-center md:text-xl mb-8">
+          <p className="text-lg text-center md:text-xl">
             Soluções imobiliárias inteligentes com a expertise que você precisa para fazer o melhor negócio.
           </p>
 
-          <div className="bg-white p-4 rounded-lg shadow-lg">
+          <div className="flex flex-wrap justify-center gap-4 mt-6">
+            <WhatsappButtonSemLink
+              className="py-3 px-5 bg-secondary text-white text-center font-medium rounded-md hover:bg-secondary/90 transition-colors"
+              mensagem="Olá! quero vender meu imovel!"
+              textoBotao="Vender imóvel"
+            />
+
+            <WhatsappButtonSemLink
+              className="py-3 px-5 border-2 border-[#f3c76c] text-primary bg-white/10 text-center font-medium rounded-md hover:bg-black transition-colors"
+              mensagem="Olá! quero comprar um imovel!"
+              textoBotao="Comprar imóvel"
+            />
+          </div>
+
+
+          {/* <div className="bg-white p-4 rounded-lg shadow-lg">
             <div className="flex flex-col md:flex-row gap-4">
               <div className="flex-1">
                 <select className="w-full p-3 border border-gray-300 rounded-md text-black">
@@ -57,7 +71,7 @@ export default function Hero() {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

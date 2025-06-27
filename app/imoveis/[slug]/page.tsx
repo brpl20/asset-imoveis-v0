@@ -4,6 +4,9 @@ import { Bath, BedDouble, Car, CheckCircle, MapPin, Ruler, Share2 } from "lucide
 import type { Metadata } from "next"
 import PropertyImages from "./PropertyImages"
 import { getProperties, getPropertyBySlug, getImageUrl, PropertyImage } from "@/src/services/strapi"
+import { WhatsappButton } from "@/components/WhatsButton"
+import SocialShare from '@/components/SocialShare'
+
 
 interface FormattedProperty {
   id: number;
@@ -57,7 +60,7 @@ export const revalidate = 60;
 
 export async function generateStaticParams() {
   const properties = await getProperties();
-  
+
   return properties.map((property) => ({
     slug: property.slug,
   }));
@@ -101,15 +104,21 @@ export default async function PropertyPage({ params }: { params: { slug: string 
 
   // Filtra os imóveis semelhantes (exclui o imóvel atual)
   const similarProperties = allProperties
-    .filter(p => p.id !== property.id)
-    .map(formatProperty);
+    .filter(p =>
+      p.id !== property.id &&
+      Math.abs(p.bedrooms - property.bedrooms) <= 1 &&
+      Math.abs(p.bathrooms - property.bathrooms) <= 1 &&
+      Math.abs(p.area - property.area) <= 20
+    )
+    .map(formatProperty)
+    .slice(0, 6);
   return (
     <>
       <section className="pt-8 pb-16">
         <div className="container">
           <div className="mb-8">
             <Link href="/imoveis" className="text-secondary font-medium inline-flex items-center hover:underline">
-              <span className="mr-1">←</span> Voltar para Imóveis
+              <span className="text-2 mr-2">←</span> Voltar para Imóveis
             </Link>
           </div>
 
@@ -182,19 +191,21 @@ export default async function PropertyPage({ params }: { params: { slug: string 
                     </div>
                   </div>
 
-                  <button className="w-full py-3 px-4 bg-secondary text-white text-center font-medium rounded-md hover:bg-secondary/90 transition-colors mb-3">
-                    Agendar Visita
-                  </button>
+                  <WhatsappButton
+                    mensagem="Olá! Gostaria de agendar uma visita para este imóvel:"
+                    textoBotao="Agendar Visita"
+                    className="w-full py-3 px-4 bg-secondary text-white text-center font-medium rounded-md hover:bg-secondary/90 transition-colors mb-3"
+                  />
 
-                  <button className="w-full py-3 px-4 border-2 border-primary text-primary bg-white text-center font-medium rounded-md hover:bg-primary/10 transition-colors">
-                    Solicitar Informações
-                  </button>
+
+                  <WhatsappButton
+                    mensagem="Olá! Gostaria de saber mais informações sobre este imóvel:"
+                    textoBotao="Solicitar Informações"
+                    className="w-full py-3 px-4 border-2 border-primary text-primary bg-white text-center font-medium rounded-md hover:bg-primary/10 transition-colors"
+                  />
 
                   <div className="mt-4 flex justify-center">
-                    <button className="inline-flex items-center text-gray-500 hover:text-secondary">
-                      <Share2 className="h-4 w-4 mr-1" />
-                      Compartilhar
-                    </button>
+                    <SocialShare />
                   </div>
                 </div>
 
@@ -203,12 +214,11 @@ export default async function PropertyPage({ params }: { params: { slug: string 
                   <p className="mb-6 text-gray-700">
                     Nossos consultores estão prontos para ajudar você a encontrar o imóvel ideal para suas necessidades.
                   </p>
-                  <Link
-                    href="/contato"
+                  <WhatsappButton
+                    mensagem="Olá! Tenho interesse neste imóvel:"
+                    textoBotao="Entrar em Contato"
                     className="block w-full py-3 px-4 bg-secondary text-white text-center font-medium rounded-md hover:bg-secondary/90 transition-colors"
-                  >
-                    Entrar em Contato
-                  </Link>
+                  />
                 </div>
               </div>
             </div>
@@ -218,7 +228,7 @@ export default async function PropertyPage({ params }: { params: { slug: string 
 
       <section className="bg-gray-50 py-16 border-t border-primary/20">
         <div className="container">
-          <h2 className="heading-lg mb-12 text-center text-secondary">Imóveis Semelhantes</h2>
+          <h2 className="mb-12 text-center text-secondary text-[22px]">Imóveis Semelhantes</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {similarProperties.map((relatedProperty) => (
               <Link key={relatedProperty.id} href={`/imoveis/${relatedProperty.slug}`} className="group">

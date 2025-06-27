@@ -8,18 +8,16 @@ const testimonials = [
     name: "Carlos Silva",
     role: "Comprador",
     content:
-      "Excelente experiência com a Asset Imobiliária. Encontrei o apartamento dos meus sonhos em tempo recorde. Profissionais extremamente competentes e atenciosos.",
+      "Excelente experiência com a Asset Imobiliária. Profissionais extremamente competentes e atenciosos.",
     rating: 5,
-    image: "/placeholder.svg?height=100&width=100",
   },
   {
     id: 2,
     name: "Ana Oliveira",
     role: "Vendedora",
     content:
-      "Vendi meu imóvel em apenas 3 semanas com a Asset. Toda a negociação foi conduzida com muita transparência e profissionalismo. Super recomendo!",
+      "Vendi meu imóvel com a Asset. Toda a negociação foi conduzida com muita transparência e profissionalismo. Super recomendo!",
     rating: 5,
-    image: "/placeholder.svg?height=100&width=100",
   },
 ]
 
@@ -36,14 +34,6 @@ export default function Testimonials() {
         {testimonials.map((testimonial) => (
           <div key={testimonial.id} className="bg-white p-6 rounded-lg shadow-lg">
             <div className="flex items-center mb-4">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
-                <Image
-                  src={testimonial.image || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
               <div>
                 <h4 className="font-semibold">{testimonial.name}</h4>
                 <p className="text-sm text-gray-600">{testimonial.role}</p>

@@ -2,10 +2,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { Bath, BedDouble, MapPin, Maximize } from "lucide-react"
 import { CustomButton } from "./ui/custom-button"
-import type { FormattedProperty } from "../app/imoveis/page"
-import { getProperties, getImageUrl, PropertyImage } from "../src/services/strapi"
-import { revalidateTag } from 'next/cache';
-
+import type { FormattedProperty } from "../app/imoveis/ImoveisClient"
+import { getImageUrl, PropertyImage } from "../src/services/strapi"
 
 function formatProperty(property: any): FormattedProperty {
   return {
@@ -19,17 +17,27 @@ function formatProperty(property: any): FormattedProperty {
     area: property.area || 0,
     images: property.images?.map((img: PropertyImage) => getImageUrl(img)) || ['/placeholder.svg'],
     slug: property.slug || '',
+    type: property.type || 'outro',
   };
 }
 
-export const revalidate = 60;
-export const dynamic = 'force-dynamic';
-
 export default async function FeaturedProperties() {
   try {
-    const allProperties = await getProperties();
+    const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/imovels?populate=*`, {
+      headers: {
+        'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}`
+      },
+      next: { 
+        tags: ['featured-properties'],
+        revalidate: 60
+      }
+    });
 
-    // Verificação segura com fallback para array vazio
+    if (!response.ok) {
+      throw new Error('Falha ao carregar imóveis');
+    }
+
+    const { data: allProperties } = await response.json();
     const safeProperties = Array.isArray(allProperties) ? allProperties : [];
 
     // Filtro com verificação completa da estrutura
