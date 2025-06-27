@@ -1,4 +1,6 @@
 import { WhatsappButtonSemLink } from "@/components/WhatsButton"
+import Link from "next/link"
+
 export default function Hero() {
   return (
     <div className="relative bg-black text-[#f3c76c] py-20 md:py-32 w-full">
@@ -25,11 +27,9 @@ export default function Hero() {
               textoBotao="Vender imóvel"
             />
 
-            <WhatsappButtonSemLink
-              className="py-3 px-5 border-2 border-[#f3c76c] text-primary bg-white/10 text-center font-medium rounded-md hover:bg-black transition-colors"
-              mensagem="Olá! quero comprar um imovel!"
-              textoBotao="Comprar imóvel"
-            />
+            <Link href="/imoveis" className="py-3 px-5 border-2 border-[#f3c76c] text-primary bg-white/10 text-center font-medium rounded-md hover:bg-black transition-colors">
+            Comprar imóvel
+            </Link>
           </div>
 
 

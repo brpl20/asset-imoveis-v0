@@ -6,10 +6,27 @@ import { getBlogPosts, getBlogCategories, getBlogImageUrl } from "@/src/services
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
 
-export default async function BlogPage() {
+interface BlogPageProps {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export default async function BlogPage({ searchParams = {} }: BlogPageProps) {
+  const categoriaSelecionada =
+    typeof searchParams.categoria === 'string'
+      ? searchParams.categoria
+      : Array.isArray(searchParams.categoria)
+      ? searchParams.categoria[0]
+      : '';
   const posts = await getBlogPosts();
   const categories = await getBlogCategories();
 
+  const filteredPosts = categoriaSelecionada
+    ? posts.filter(
+      (post) =>
+        post.attributes.category.toLowerCase() ===
+        categoriaSelecionada.toString().toLowerCase()
+    )
+    : posts;
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="text-center mb-12">
@@ -22,7 +39,7 @@ export default async function BlogPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="grid grid-cols-1 gap-8">
-            {posts.map((post) => {
+            {filteredPosts.map((post) => {
               const mainImage = post.attributes.image?.data?.[0]?.attributes;
 
               return (
@@ -85,45 +102,24 @@ export default async function BlogPage() {
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h3 className="text-xl font-archivo tracking-wider mb-4">Categorias</h3>
             <ul className="space-y-2">
-              {categories.map((category) => (
-                <li key={category}>
-                  <Link
-                    href={`/blog?categoria=${category.toLowerCase()}`}
-                    className="text-gray-700 hover:text-[#c38d51] transition-colors"
-                  >
-                    {category}
-                  </Link>
-                </li>
-              ))}
+              {categories.map((category) => {
+                const categoriaStr = Array.isArray(categoriaSelecionada) ? categoriaSelecionada[0] : categoriaSelecionada;
+                const isActive = categoriaStr?.toLowerCase() === category.toLowerCase();
+
+                return (
+                  <li key={category}>
+                    <Link
+                      href={`/blog?categoria=${category.toLowerCase()}`}
+                      className={`transition-colors ${isActive ? "text-[#c38d51] font-bold" : "text-gray-700 hover:text-[#c38d51]"
+                        }`}
+                    >
+                      {category}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
-          {/* <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="text-xl font-archivo tracking-wider mb-4">Posts Populares</h3>
-            <div className="space-y-4">
-              {posts.slice(0, 3).map((post) => (
-                <Link key={post.id} href={`/blog/${post.attributes.slug}`} className="group flex gap-3">
-                  <div className="relative w-20 h-20 flex-shrink-0">
-                    <Image
-                      src={post.attributes.image?.data
-                        ? getBlogImageUrl(post.attributes.image.data, 'thumbnail')
-                        : "/placeholder.svg"}
-                      alt={post.attributes.title}
-                      fill
-                      className="object-cover rounded"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-medium group-hover:text-[#c38d51] transition-colors">
-                      {post.attributes.title}
-                    </h4>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {new Date(post.attributes.publishedAt).toLocaleDateString('pt-BR')}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
